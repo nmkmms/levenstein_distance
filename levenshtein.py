@@ -10,7 +10,7 @@ FILENAME = 'enwiki-small-cen.txt'
 CODE_WORD = 'Algebra'
 
 # Maximum Leventstein distance
-MAX_DISTANCE = 1
+MAX_DISTANCE = 2
 
 # END OF USER INPUT
 # ==================================================
