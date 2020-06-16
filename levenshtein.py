@@ -1,4 +1,4 @@
-"""Find all words from file which has Levenstein distance 1 or 2 to given word."""
+"""Find all words from file which has no more then given Levenstein distance to given word."""
 import os
 # ==================================================
 # USER INPUT:
@@ -9,6 +9,9 @@ FILENAME = 'enwiki-small-cen.txt'
 # Word to search
 CODE_WORD = 'Algebra'
 
+# Maximum Leventstein distance
+MAX_DISTANCE = 1
+
 # END OF USER INPUT
 # ==================================================
 
@@ -18,17 +21,19 @@ def main():
     words = load_dictionary(FILENAME)
 
     # List, which contains 2 empty lists to contain results
-    found = [[], []]
+    found = [[] for _ in range(MAX_DISTANCE)]
 
     # Filling lists 
     # Add word to first list, if L distance is 1
     # Add word to second list, if L distance is 2
     for word in words:
+        if abs(len(CODE_WORD) - len(word)) > MAX_DISTANCE:
+            continue
         distance = levenshtein(CODE_WORD, word)
-        if distance in (1, 2):
+        if distance in range(1, MAX_DISTANCE + 1):
             found[distance - 1].append(word)
 
-    for i in range(2):
+    for i in range(MAX_DISTANCE):
         print(f"Words with Levenshtein distance {i + 1} to word {CODE_WORD}:")
         for word in found[i]:
             print(f"\t{word}")
